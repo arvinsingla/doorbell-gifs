@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doorbell Gifs</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Unifi Doorbell Pro GIF collection</h1>
+    <div id="content"></div>
+    
+    <script>
+        fetch('gifs.json')
+            .then(response => response.json())
+            .then(data => {
+                const contentDiv = document.getElementById('content');
+                data.forEach(item => {
+                    const gifDiv = document.createElement('div');
+                    gifDiv.classList.add('gif');
+
+                    const image = document.createElement('img');
+                    image.src = `gifs/${item.file}`;
+                    gifDiv.appendChild(image);
+
+                    const title = document.createElement('h2');
+                    title.textContent = item.title;
+                    gifDiv.appendChild(title);
+
+                    contentDiv.appendChild(gifDiv);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>
