@@ -50,13 +50,18 @@ table {
  * Custom CSS
  */
 
-
-
 body {
     padding: 20px 10px 0 10px;
     font-family: Helvetica, Arial, sans-serif;
 }
- 
+
+footer p {
+    font-size: 10px;
+    text-align: center;
+    padding-top: 10px;
+    color: #999999;
+}
+
 h1 {
     font-size: 32px;
     padding-bottom: 20px;
