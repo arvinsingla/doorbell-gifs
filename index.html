@@ -7,30 +7,58 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Unifi Doorbell Pro GIF collection</h1>
-    <div id="content"></div>
+    <div class="layout">
+        <div class="doorbell">
+            <img class="doorbell-main" src="doorbell.png" title="Unifi G4 Doorbell Pro" />
+            <div class="doorbell-gif-container">
+                <img class="doorbell-gif" src="gifs/pedro.gif" title="Pedro Raccoon" />
+            </div>
+        </div>
+        <div id="content">
+            <h1>Unifi Doorbell Pro GIF tester</h1>
+            <p>Enter the URL to a gif, png, or jpeg below to see how it will might look on your Doorbell pro.</p>
+            <form id="gif-form">
+                <input type="text" id="gif-url" name="gif-url" />
+                <button type="submit">Submit</button>
+            </form>
+            <h2>Example GIFs</h2>
+            <div id="links"></div>
+        </div>
+    </div>
     
-    <script>
-        fetch('gifs.json')
+    <script> 
+        const gifForm = document.getElementById('gif-form');
+        gifForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const gifUrlInput = document.getElementById('gif-url');
+            const gifUrl = gifUrlInput.value;
+            if (!gifUrl) {
+                return;
+            }
+            const doorbellGif = document.querySelector('.doorbell-gif');
+            doorbellGif.src = gifUrl;
+            doorbellGif.title = 'Custom Gif';
+            gifUrlInput.value = '';
+        });
+        fetch('data.json')
             .then(response => response.json())
             .then(data => {
-                const contentDiv = document.getElementById('content');
+                const contentDiv = document.getElementById('links');
                 data.forEach(item => {
-                    const gifDiv = document.createElement('div');
-                    gifDiv.classList.add('gif');
-
-                    const image = document.createElement('img');
-                    image.src = `gifs/${item.file}`;
-                    gifDiv.appendChild(image);
-
-                    const title = document.createElement('h2');
-                    title.textContent = item.title;
-                    gifDiv.appendChild(title);
-
-                    contentDiv.appendChild(gifDiv);
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.textContent = item.name;
+                    link.addEventListener('click', () => {
+                        const doorbellGif = document.querySelector('.doorbell-gif');
+                        doorbellGif.src = `gifs/${item.image}`;
+                        doorbellGif.title = item.name;
+                    });
+                    contentDiv.appendChild(link);
                 });
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => {
+                console.error('Error:', error);
+            });
     </script>
 </body>
 </html>

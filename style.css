@@ -46,23 +46,64 @@ table {
 	border-spacing: 0;
 }
 
+/**
+ * Custom CSS
+ */
+
+body {
+    padding: 20px 10px 0 10px;
+}
+ 
 h1 {
-    text-align: center;
-    font-size: 36px;
-    padding: 30px 0;
+    font-size: 32px;
+    padding-bottom: 20px;
 }
 
-#content {
-    max-width: 1000px;
-    gap: 16px;
+h2 {
+    font-size: 24px;
+    padding-bottom: 10px;
+}
+
+p {
+    font-size: 18px;
+    padding-bottom: 20px;
+}
+
+.layout {
+    max-width: 600px;
     margin: 0 auto;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    gap: 10px;
+}
+ 
+#links, #gif-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: flex-start;
 }
 
-.gif img {
-    width: 100px;
-    height: 100px;
-    cursor: grab;
+.doorbell {
+    position: relative;
+    display: inline-block;
+}
+.doorbell-main {
+    z-index: 100;
+}
+.doorbell-gif-container {
+    z-index: -1;
+    position: absolute;
+    text-align: center;
+    top: 354px;
+    height: 86px;
+    width: 100%;
+}
+.doorbell-gif {
+    height: 86px;
+}
+
+.fetch-form {
+    width: 100%;
+    padding-bottom: 20px;
 }
